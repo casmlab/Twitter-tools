@@ -1,0 +1,57 @@
+======
+README
+======
+
+This document contains the instructions for various Twitter-related scripts contained in the Twitter-collector repo.
+
+-------
+License
+-------
+
+Unless otherwise specified, all CaSM Lab code, including everything in this repository, is distributed under the Apache 2.0 license with the following boilerplate message:
+
+   Copyright 2011 Libby Hemphill (libby.hemphill@iit.edu)
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+------------
+Instructions
+------------
+
+-- constants_example.rb --
+Most of the code in this repo requires your Twitter credentials. Save constants_example.rb as constants.rb and update all the entries with your credentials.
+
+To get OAuth credentials, you must register your application with Twitter. See http://dev.twitter.com/pages/auth#register for details.
+
+-- get_user_ids.rb --
+A short script that accepts an array of Twitter screen_names and returns a list of names and their matching Twitter user_ids as a CSV file. The Streaming API requires user_id for most functions that allow you to collect data by user, and this is the fastest way to get a list of user_ids for users you want to follow, aggregate, etc.
+
+Dependencies:
+rubygems
+twitter4r
+twitter
+
+Setup:
+Make sure constants.rb contains your Twitter OAuth credentials.
+Put all the screen_names you want to lookup in a plain text file, one screen_name per line.
+
+Usage:
+
+ruby get_user_ids.rb input_file output_file
+
+where input_file and output_file are full paths to the list of screen_names and the CSV file you want the script to create with screen_names and ids.
+
+-----
+To Do
+-----
+1. Allow batch lookup in get_users_ids.rb (Twitter will allow you to look up 20 at a time.)

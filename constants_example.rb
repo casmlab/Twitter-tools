@@ -1,0 +1,8 @@
+# User: screen_name
+CONSUMER_KEY = ""
+CONSUMER_SECRET = ""
+OAUTH_TOKEN = ""
+OAUTH_TOKEN_SECRET = ""
+
+SCREEN_NAME = ""
+PASSWORD = ""

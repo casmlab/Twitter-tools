@@ -1,5 +1,3 @@
-require 'rubygems'
-gem "twitter4r"
 require 'twitter'
 require File.join(File.expand_path(File.dirname(__FILE__)), ".", "constants.rb") # config info like Twitter username and ID
 
@@ -11,9 +9,9 @@ output_file = ARGV[1]
 # output_file = File.join(File.expand_path(File.dirname(__FILE__)), ".", "output_test.csv")
 
 # configure the Twitter client with your info from constants.rb
-Twitter::Client.configure do |conf|
-   conf.oauth_consumer_token = CONSUMER_KEY
-   conf.oauth_consumer_secret = CONSUMER_SECRET
+Twitter.configure do |conf|
+   conf.consumer_key = CONSUMER_KEY
+   conf.consumer_secret = CONSUMER_SECRET
 end
 
 client = Twitter::Client.new(:oauth_access =>
@@ -29,13 +27,13 @@ not_found = 0
 puts "starting screen name lookup"
 begin
   screen_names = IO.readlines(input_file)
-  of = File.open(output_file,"w+") 
+  of = File.open(output_file,"w+")
   screen_names.each do |name|
     begin
       counter+=1
       user = client.user(name.chomp) # chomp removes any carriage breaks
       of.puts "\"" + user.screen_name + "\", " + user.id.to_s
-    rescue Twitter::NotFoundError
+    rescue Twitter::Error::NotFound
       not_found+=1
       of.puts "\"" + name.chomp + "\", \"not found\""
     end
